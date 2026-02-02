@@ -1,0 +1,85 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Valentine Card</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #ffe6ee;
+      text-align: center;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+    .card {
+      margin-top: 50px;
+    }
+    .hint {
+      margin-top: 10px;
+      color: #555;
+    }
+    .result {
+      display: none;
+      margin-top: 20px;
+      font-size: 24px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="confettiCanvas"></canvas>
+
+  <main class="card" id="zone">
+    <h1>AD will you be my valentine?</h1>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+    <div class="hint" id="hint">“No” seems a bit shy 😈</div>
+  </main>
+
+  <section class="result" id="result">
+    <h2>YAY! 🎉</h2>
+  </section>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const zone = document.getElementById("zone");
+    const result = document.getElementById("result");
+    const hint = document.getElementById("hint");
+    const confettiCanvas = document.getElementById("confettiCanvas");
+
+    function resizeConfettiCanvas() {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+    }
+
+    function fullScreenConfetti() {
+      const ctx = confettiCanvas.getContext("2d");
+      ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      ctx.font = "40px serif";
+      ctx.fillText("🎉🎉🎉", 100, 100);
+    }
+
+    yesBtn.addEventListener("click", () => {
+      zone.style.display = "none";
+      hint.style.display = "none";
+      result.style.display = "block";
+      resizeConfettiCanvas();
+      fullScreenConfetti();
+    });
+
+    noBtn.addEventListener("mouseover", () => {
+      noBtn.style.position = "absolute";
+      noBtn.style.left = Math.random() * 80 + "%";
+      noBtn.style.top = Math.random() * 80 + "%";
+    });
+
+    window.addEventListener("resize", resizeConfettiCanvas);
+  </script>
+</body>
+</html>
